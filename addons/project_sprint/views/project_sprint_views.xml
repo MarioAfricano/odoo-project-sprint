@@ -13,8 +13,8 @@
                 <field name="points_done" optional="hide"/>
                 <field name="points_total" optional="hide"/>
                 <field name="progress" widget="progressbar" invisible="state == 'done'"/>
-                <field name="committed_points" optional="show"/>
-                <field name="delivered_points" optional="show"/>
+                <field name="committed_points" optional="show" invisible="state == 'draft'"/>
+                <field name="delivered_points" optional="show" invisible="state != 'done'"/>
                 <field name="state" widget="badge"/>
             </list>
         </field>
