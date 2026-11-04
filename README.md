@@ -6,7 +6,21 @@ The module is in `addons/project_sprint`.
 
 ## Run it with Docker
 
-Requires Docker with Docker Compose. The first start downloads the Odoo and PostgreSQL images, which can take several minutes.
+### 1. Install the requirements
+
+Install [Git](https://git-scm.com/downloads) and [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+On Windows, first run this in PowerShell as administrator, then restart the computer:
+
+```powershell
+wsl --install
+```
+
+Open Docker Desktop and wait until the engine is running.
+
+### 2. First start
+
+The first start downloads the Odoo and PostgreSQL images, which can take several minutes.
 
 ```bash
 git clone https://github.com/MarioAfricano/odoo-project-sprint.git
@@ -30,7 +44,36 @@ sh reset_demo.sh
 
 Open http://localhost:8069/web/database/selector, choose `much_demo` and log in with `admin` / `admin`. These credentials are for this local demo only.
 
-Run the same script again at any time to recreate the demo database from scratch. Demo dates are relative to the day it is created.
+### 3. After restarting the computer
+
+Open Docker Desktop, wait until the engine is running, and run this in the `odoo-project-sprint` folder:
+
+```bash
+docker compose up -d
+```
+
+Your data is kept, so you can log in straight away. No internet connection is needed once the images are downloaded.
+
+### 4. Reset the demo data
+
+Run the script from step 2 again at any time to recreate the demo database from scratch. Demo dates are relative to the day it is created, so run it on the day of a demo.
+
+### 5. Update to the latest code
+
+```bash
+git pull
+docker compose restart odoo
+```
+
+Then run the script from step 2 again.
+
+### 6. Stop it
+
+```bash
+docker compose down
+```
+
+This stops the containers and keeps your data.
 
 ## Install it on an existing Odoo 18
 
