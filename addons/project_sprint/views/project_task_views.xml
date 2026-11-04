@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_task_view_form_inherit_sprint" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.sprint</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="sprint_id" options="{'no_create': True}"/>
+                <field name="story_points"/>
+                <field name="sprint_history_ids" widget="many2many_tags" invisible="not sprint_history_ids"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_task_view_search_inherit_sprint" model="ir.ui.view">
+        <field name="name">project.task.search.inherit.sprint</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="sprint_id"/>
+            </field>
+            <filter name="unassigned" position="after">
+                <separator/>
+                <filter string="My Sprint" name="my_sprint"
+                        domain="[('sprint_id.state', '=', 'active'), ('sprint_id.team_id.member_ids', 'in', uid)]"/>
+                <filter string="Current Sprint" name="current_sprint"
+                        domain="[('sprint_id.state', '=', 'active')]"/>
+                <filter string="Backlog" name="backlog"
+                        domain="[('sprint_id', '=', False), ('is_closed', '=', False)]"/>
+            </filter>
+            <filter name="stage" position="after">
+                <filter string="Sprint" name="group_by_sprint" context="{'group_by': 'sprint_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="project_task_view_list_inherit_sprint" model="ir.ui.view">
+        <field name="name">project.task.list.inherit.sprint</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.project_task_view_tree_main_base"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="sprint_id" optional="show"/>
+                <field name="story_points" optional="show" sum="Total Points"/>
+                <field name="sprint_history_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_task_view_kanban_inherit_sprint" model="ir.ui.view">
+        <field name="name">project.task.kanban.inherit.sprint</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <div class="d-flex gap-1" t-if="record.sprint_id.raw_value">
+                    <span class="badge rounded-pill text-bg-info">
+                        <field name="sprint_id"/>
+                    </span>
+                    <span class="badge rounded-pill text-bg-light" t-if="record.story_points.raw_value">
+                        <field name="story_points"/> pts
+                    </span>
+                </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>

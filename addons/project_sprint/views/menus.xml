@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_project_sprint"
+              name="Sprints"
+              parent="project.menu_main_pm"
+              action="project_sprint_action"
+              sequence="5"/>
+
+    <menuitem id="menu_project_team"
+              name="Teams"
+              parent="project.menu_project_config"
+              action="project_team_action"
+              sequence="20"/>
+
+    <menuitem id="menu_project_sprint_velocity"
+              name="Sprint Velocity"
+              parent="project.menu_project_report"
+              action="project_sprint_action_velocity"
+              sequence="50"/>
+
+</odoo>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- USERS                                                        -->
+    <!-- ============================================================ -->
+
+    <record id="user_andrew" model="res.users">
+        <field name="name">Andrew Andrews</field>
+        <field name="login">andrew.demo</field>
+        <field name="groups_id" eval="[(4, ref('project.group_project_user'))]"/>
+    </record>
+
+    <record id="user_ava" model="res.users">
+        <field name="name">Ava Alice</field>
+        <field name="login">ava.demo</field>
+        <field name="groups_id" eval="[(4, ref('project.group_project_user'))]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TEAMS                                                        -->
+    <!-- ============================================================ -->
+
+    <record id="team_platform" model="project.team">
+        <field name="name">Platform Team</field>
+        <field name="member_ids" eval="[(6, 0, [ref('base.user_admin'), ref('base.user_demo')])]"/>
+    </record>
+
+    <record id="team_mobile" model="project.team">
+        <field name="name">Mobile Team</field>
+        <field name="member_ids" eval="[(6, 0, [ref('user_andrew')])]"/>
+    </record>
+
+    <record id="team_data" model="project.team">
+        <field name="name">Data Team</field>
+        <field name="member_ids" eval="[(6, 0, [ref('user_ava')])]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- PLATFORM TEAM SPRINTS                                        -->
+    <!-- ============================================================ -->
+
+    <record id="sprint_platform_1" model="project.sprint">
+        <field name="name">Platform Team - Sprint 1</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=8)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(weeks=6, days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="20"/>
+        <field name="delivered_points" eval="16"/>
+    </record>
+
+    <record id="sprint_platform_2" model="project.sprint">
+        <field name="name">Platform Team - Sprint 2</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=6)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(weeks=4, days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="22"/>
+        <field name="delivered_points" eval="21"/>
+    </record>
+
+    <record id="sprint_platform_3" model="project.sprint">
+        <field name="name">Platform Team - Sprint 3</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=4)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(weeks=2, days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="24"/>
+        <field name="delivered_points" eval="19"/>
+    </record>
+
+    <record id="sprint_platform_4" model="project.sprint">
+        <field name="name">Platform Team - Sprint 4</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=2)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="21"/>
+        <field name="delivered_points" eval="21"/>
+    </record>
+
+    <record id="sprint_platform_5" model="project.sprint">
+        <field name="name">Platform Team - Sprint 5</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="DateTime.today().strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() + relativedelta(weeks=2, days=-1)).strftime('%Y-%m-%d')"/>
+        <field name="goal">Launch the public API for the client portal.</field>
+    </record>
+
+    <record id="sprint_platform_6" model="project.sprint">
+        <field name="name">Platform Team - Sprint 6</field>
+        <field name="team_id" ref="team_platform"/>
+        <field name="date_start" eval="(DateTime.today() + relativedelta(weeks=2)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() + relativedelta(weeks=4, days=-1)).strftime('%Y-%m-%d')"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- MOBILE TEAM SPRINTS                                          -->
+    <!-- ============================================================ -->
+
+    <record id="sprint_mobile_1" model="project.sprint">
+        <field name="name">Mobile Team - Sprint 1</field>
+        <field name="team_id" ref="team_mobile"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=4)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(weeks=2, days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="18"/>
+        <field name="delivered_points" eval="15"/>
+    </record>
+
+    <record id="sprint_mobile_2" model="project.sprint">
+        <field name="name">Mobile Team - Sprint 2</field>
+        <field name="team_id" ref="team_mobile"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=2)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="20"/>
+        <field name="delivered_points" eval="20"/>
+    </record>
+
+    <record id="sprint_mobile_3" model="project.sprint">
+        <field name="name">Mobile Team - Sprint 3</field>
+        <field name="team_id" ref="team_mobile"/>
+        <field name="date_start" eval="DateTime.today().strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() + relativedelta(weeks=2, days=-1)).strftime('%Y-%m-%d')"/>
+        <field name="goal">Ship offline mode to the field app beta testers.</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- DATA TEAM SPRINTS                                            -->
+    <!-- ============================================================ -->
+
+    <record id="sprint_data_1" model="project.sprint">
+        <field name="name">Data Team - Sprint 1</field>
+        <field name="team_id" ref="team_data"/>
+        <field name="date_start" eval="(DateTime.today() - relativedelta(weeks=2)).strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() - relativedelta(days=1)).strftime('%Y-%m-%d')"/>
+        <field name="state">done</field>
+        <field name="committed_points" eval="12"/>
+        <field name="delivered_points" eval="9"/>
+    </record>
+
+    <record id="sprint_data_2" model="project.sprint">
+        <field name="name">Data Team - Sprint 2</field>
+        <field name="team_id" ref="team_data"/>
+        <field name="date_start" eval="DateTime.today().strftime('%Y-%m-%d')"/>
+        <field name="date_end" eval="(DateTime.today() + relativedelta(weeks=2, days=-1)).strftime('%Y-%m-%d')"/>
+        <field name="goal">Deliver the first version of the sales dashboard.</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TASKS - PLATFORM TEAM, SPRINT 4 (done, 21 points delivered)  -->
+    <!-- ============================================================ -->
+
+    <record id="task_platform_search" model="project.task">
+        <field name="name">Search indexing</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_platform_4"/>
+        <field name="story_points" eval="8"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_platform_email" model="project.task">
+        <field name="name">Email templates</field>
+        <field name="project_id" ref="project.project_project_1"/>
+        <field name="sprint_id" ref="sprint_platform_4"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_demo')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_platform_storage" model="project.task">
+        <field name="name">Document storage service</field>
+        <field name="project_id" ref="project.project_project_3"/>
+        <field name="sprint_id" ref="sprint_platform_4"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_platform_health" model="project.task">
+        <field name="name">Health check endpoint</field>
+        <field name="project_id" ref="project.project_home_construction"/>
+        <field name="sprint_id" ref="sprint_platform_4"/>
+        <field name="story_points" eval="3"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_demo')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TASKS - PLATFORM TEAM, SPRINT 5 (active)                     -->
+    <!-- ============================================================ -->
+
+    <record id="task_platform_api" model="project.task">
+        <field name="name">Design public REST API</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="8"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_platform_sso" model="project.task">
+        <field name="name">Single sign-on integration</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_demo')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_platform_cache" model="project.task">
+        <field name="name">Add caching layer to reports</field>
+        <field name="project_id" ref="project.project_project_1"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+    </record>
+
+    <record id="task_platform_ci" model="project.task">
+        <field name="name">Set up CI pipeline for the client portal</field>
+        <field name="project_id" ref="project.project_project_3"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="3"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_demo')])]"/>
+    </record>
+
+    <!-- Assigned to Andrew (Mobile Team): shows up as a borrowed member -->
+    <record id="task_platform_push" model="project.task">
+        <field name="name">Push notification endpoint</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="3"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_andrew')])]"/>
+    </record>
+
+    <record id="task_platform_logging" model="project.task">
+        <field name="name">Centralised logging</field>
+        <field name="project_id" ref="project.project_home_construction"/>
+        <field name="sprint_id" ref="sprint_platform_5"/>
+        <field name="story_points" eval="2"/>
+        <field name="user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TASKS - MOBILE TEAM, SPRINT 3 (active)                       -->
+    <!-- ============================================================ -->
+
+    <record id="task_mobile_offline" model="project.task">
+        <field name="name">Offline mode for the field app</field>
+        <field name="project_id" ref="project.project_project_3"/>
+        <field name="sprint_id" ref="sprint_mobile_3"/>
+        <field name="story_points" eval="8"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_andrew')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_mobile_dark_mode" model="project.task">
+        <field name="name">Dark mode</field>
+        <field name="project_id" ref="project.project_project_4"/>
+        <field name="sprint_id" ref="sprint_mobile_3"/>
+        <field name="story_points" eval="3"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_andrew')])]"/>
+    </record>
+
+    <!-- Assigned to Ava (Data Team): shows up as a borrowed member -->
+    <record id="task_mobile_crash_reports" model="project.task">
+        <field name="name">Crash reporting</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_mobile_3"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_ava')])]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TASKS - DATA TEAM, SPRINT 2 (active)                         -->
+    <!-- ============================================================ -->
+
+    <record id="task_data_etl" model="project.task">
+        <field name="name">Sales dashboard ETL</field>
+        <field name="project_id" ref="project.project_project_1"/>
+        <field name="sprint_id" ref="sprint_data_2"/>
+        <field name="story_points" eval="5"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_ava')])]"/>
+        <field name="state">1_done</field>
+    </record>
+
+    <record id="task_data_schema" model="project.task">
+        <field name="name">Data warehouse schema review</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="sprint_id" ref="sprint_data_2"/>
+        <field name="story_points" eval="3"/>
+        <field name="user_ids" eval="[(6, 0, [ref('user_ava')])]"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- TASKS - BACKLOG (no sprint)                                  -->
+    <!-- ============================================================ -->
+
+    <record id="task_backlog_upgrade" model="project.task">
+        <field name="name">Upgrade to the latest framework version</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="story_points" eval="8"/>
+    </record>
+
+    <record id="task_backlog_accessibility" model="project.task">
+        <field name="name">Accessibility audit</field>
+        <field name="project_id" ref="project.project_project_1"/>
+        <field name="story_points" eval="5"/>
+    </record>
+
+    <record id="task_backlog_excel" model="project.task">
+        <field name="name">Export reports to Excel</field>
+        <field name="project_id" ref="project.project_project_3"/>
+        <field name="story_points" eval="3"/>
+    </record>
+
+    <record id="task_backlog_2fa" model="project.task">
+        <field name="name">Two-factor authentication</field>
+        <field name="project_id" ref="project.project_project_2"/>
+        <field name="story_points" eval="5"/>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- START THE ACTIVE SPRINTS                                     -->
+    <!-- Called after the tasks exist, so committed points are real.  -->
+    <!-- ============================================================ -->
+
+    <function model="project.sprint" name="action_start"
+              eval="[[ref('sprint_platform_5'), ref('sprint_mobile_3'), ref('sprint_data_2')]]"/>
+
+</odoo>

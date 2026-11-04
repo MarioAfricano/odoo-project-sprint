@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_sprint_close_wizard_view_form" model="ir.ui.view">
+        <field name="name">project.sprint.close.wizard.form</field>
+        <field name="model">project.sprint.close.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Close Sprint">
+                <field name="team_id" invisible="1"/>
+                <group>
+                    <field name="sprint_id" readonly="1"/>
+                    <field name="open_task_count"/>
+                </group>
+                <field name="open_task_ids" readonly="1">
+                    <list>
+                        <field name="name"/>
+                        <field name="project_id"/>
+                        <field name="story_points"/>
+                    </list>
+                </field>
+                <group>
+                    <field name="destination" widget="radio"/>
+                    <field name="next_sprint_id"
+                           invisible="destination != 'next_sprint'"
+                           required="destination == 'next_sprint'"
+                           options="{'no_create': True}"/>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Close Sprint" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
